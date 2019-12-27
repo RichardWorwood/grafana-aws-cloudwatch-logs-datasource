@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import TableModel from 'grafana/app/core/table_model';
 import flatten from 'grafana/app/core/utils/flatten';
-import { DataSourceApi, DataSourceInstanceSettings } from '@grafana/ui';
+import { DataSourceApi, DataSourceInstanceSettings, DataQueryRequest, DataQueryResponse } from '@grafana/data';
 import { AwsCloudWatchLogsQuery, AwsCloudWatchLogsOptions } from './types';
 
 export default class AwsCloudWatchLogsDatasource extends DataSourceApi<AwsCloudWatchLogsQuery, AwsCloudWatchLogsOptions> {
@@ -27,7 +27,9 @@ export default class AwsCloudWatchLogsDatasource extends DataSourceApi<AwsCloudW
     this.defaultRegion = settingsData.defaultRegion;
   }
 
-  async query(options) {
+  async query(options: DataQueryRequest<AwsCloudWatchLogsQuery>): Promise<DataQueryResponse> {
+    console.log('query');
+    console.log(options);
     const query = this.buildQueryParameters(options);
     query.targets = query.targets.filter(t => !t.hide);
 
