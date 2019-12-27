@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import TableModel from 'grafana/app/core/table_model';
 import flatten from 'grafana/app/core/utils/flatten';
-import { DataSourceApi, DataSourceInstanceSettings, DataQueryRequest, DataQueryResponse } from '@grafana/data';
+import { DataSourceApi, DataSourceInstanceSettings, DataQueryRequest, DataQueryResponse, toDataFrame } from '@grafana/data';
 import { AwsCloudWatchLogsQuery, AwsCloudWatchLogsOptions } from './types';
 
 export default class AwsCloudWatchLogsDatasource extends DataSourceApi<AwsCloudWatchLogsQuery, AwsCloudWatchLogsOptions> {
@@ -122,7 +122,7 @@ export default class AwsCloudWatchLogsDatasource extends DataSourceApi<AwsCloudW
       }
       if (!_.isEmpty(r.tables)) {
         _.forEach(r.tables, t => {
-          res.push(this.expandMessageField(t));
+          res.push(toDataFrame(this.expandMessageField(t)));
         });
       }
     }
