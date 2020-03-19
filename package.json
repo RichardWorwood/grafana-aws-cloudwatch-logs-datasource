@@ -12,7 +12,7 @@
   "dependencies": {
     "lodash": "^4.17.15",
     "moment": "^2.22.1",
-    "rxjs": "^6.2.1",
+    "rxjs": "^6.5.4",
     "rxjs-compat": "^6.2.1"
   },
   "devDependencies": {
